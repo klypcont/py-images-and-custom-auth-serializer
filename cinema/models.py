@@ -57,8 +57,12 @@ class Movie(models.Model):
 
 class MovieSession(models.Model):
     show_time = models.DateTimeField()
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name="movie_sessions")
-    cinema_hall = models.ForeignKey(CinemaHall, on_delete=models.CASCADE, related_name="movie_sessions")
+    movie = models.ForeignKey(
+        Movie, on_delete=models.CASCADE, related_name="movie_sessions"
+    )
+    cinema_hall = models.ForeignKey(
+        CinemaHall, on_delete=models.CASCADE, related_name="movie_sessions"
+    )
 
     def __str__(self):
         return f"{self.movie.title} {str(self.show_time)}"
@@ -78,8 +82,12 @@ class Order(models.Model):
 class Ticket(models.Model):
     row = models.IntegerField()
     seat = models.IntegerField()
-    movie_session = models.ForeignKey(MovieSession, on_delete=models.CASCADE, related_name="tickets")
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="tickets")
+    movie_session = models.ForeignKey(
+        MovieSession, on_delete=models.CASCADE, related_name="tickets"
+    )
+    order = models.ForeignKey(
+        Order, on_delete=models.CASCADE, related_name="tickets"
+    )
 
     @staticmethod
     def validate_ticket(row, seat, cinema_hall, error_to_raise):
@@ -107,7 +115,9 @@ class Ticket(models.Model):
         return super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{str(self.movie_session)} (row: {self.row}, seat: {self.seat})"
+        return (
+            f"{str(self.movie_session)} (row: {self.row}, seat: {self.seat})"
+        )
 
     class Meta:
         unique_together = ("movie_session", "row", "seat")

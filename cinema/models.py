@@ -53,6 +53,9 @@ class Movie(models.Model):
         null=True,
         upload_to=movie_image_file_path,
     )
+        null=True,
+        upload_to=movie_image_file_path,
+    )
 
     def __str__(self):
         return self.title

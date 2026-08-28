@@ -49,7 +49,10 @@ class Movie(models.Model):
     duration = models.IntegerField()
     actors = models.ManyToManyField(Actor, related_name="movies", blank=True)
     genres = models.ManyToManyField(Genre, related_name="movies", blank=True)
-    image = models.ImageField(null=True, upload_to=movie_image_file_path)
+    image = models.ImageField(
+        null=True,
+        upload_to=movie_image_file_path,
+    )
         null=True,
         upload_to=movie_image_file_path,
     )

@@ -101,7 +101,10 @@ class Ticket(models.Model):
             if not (1 <= ticket_attr_value <= ticket_attr_range):
                 raise error_to_raise(
                     {
-                        ticket_attr_name: f"{ticket_attr_name} number must be in available range: (1, {ticket_attr_range})"
+                        ticket_attr_name: (
+                            f"{ticket_attr_name} number must be "
+                            f"in available range: (1, {ticket_attr_range})"
+                        )
                     }
                 )
 

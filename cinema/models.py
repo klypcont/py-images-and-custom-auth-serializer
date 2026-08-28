@@ -51,7 +51,6 @@ class Movie(models.Model):
     genres = models.ManyToManyField(Genre, related_name="movies", blank=True)
     image = models.ImageField(null=True, upload_to=movie_image_file_path)
     )
-    )
 
     def __str__(self):
         return self.title

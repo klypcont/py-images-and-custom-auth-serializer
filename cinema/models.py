@@ -1,10 +1,15 @@
-﻿import os
-import uuid
-from django.db import models
+﻿from django.db import models
 from django.utils.text import slugify
+import uuid
+import os
 
 
-def movie_image_file_path(instance, filename):
-    _, ext = os.path.splitext(filename)
-    filename = f"{slugify(instance.title)}-{uuid.uuid4()}{ext}"
-    return os.path.join("uploads/movies/", filename)
+class CinemaHall(models.Model):
+    name = models.CharField(max_length=255)
+    rows = models.IntegerField()
+    seats_in_row = models.IntegerField()
+
+    def __str__(self):
+        return f"{self.name} ({self.rows}x{self.seats_in_row})"
+
+# Убедись, что пустая строка есть в самом конце файла

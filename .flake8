@@ -1,3 +1,4 @@
 ﻿[flake8]
 exclude = .venv,venv,env,migrations,__pycache__,media,staticfiles
 max-line-length = 79
+ignore = Q000,W391,F401,W503

@@ -9,7 +9,6 @@ from cinema.models import (
     Movie,
     MovieSession,
     Order,
-    Ticket,
 )
 from cinema.serializers import (
     GenreSerializer,
@@ -47,18 +46,18 @@ class MovieViewSet(viewsets.ModelViewSet):
     serializer_class = MovieSerializer
 
     def get_serializer_class(self):
-        if self.action == "list":
+        if self.action == 'list':
             return MovieListSerializer
-        if self.action == "retrieve":
+        if self.action == 'retrieve':
             return MovieDetailSerializer
-        if self.action == "upload_image":
+        if self.action == 'upload_image':
             return MovieImageSerializer
         return MovieSerializer
 
     @action(
-        methods=["POST"],
+        methods=['POST'],
         detail=True,
-        url_path="upload-image",
+        url_path='upload-image',
         permission_classes=[IsAdminUser],
     )
     def upload_image(self, request, pk=None):
@@ -77,9 +76,9 @@ class MovieSessionViewSet(viewsets.ModelViewSet):
     serializer_class = MovieSessionSerializer
 
     def get_serializer_class(self):
-        if self.action == "list":
+        if self.action == 'list':
             return MovieSessionListSerializer
-        if self.action == "retrieve":
+        if self.action == 'retrieve':
             return MovieSessionDetailSerializer
         return MovieSessionSerializer
 
@@ -92,7 +91,7 @@ class OrderViewSet(viewsets.ModelViewSet):
         return Order.objects.filter(user=self.request.user)
 
     def get_serializer_class(self):
-        if self.action == "list":
+        if self.action == 'list':
             return OrderListSerializer
         return OrderSerializer
 

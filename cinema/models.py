@@ -17,7 +17,7 @@ class Actor(models.Model):
 
     @property
     def full_name(self):
-        return f"{self.first_name} {self.last_name}"
+        return f'{self.first_name} {self.last_name}'
 
     def __str__(self):
         return self.full_name
@@ -33,13 +33,13 @@ class CinemaHall(models.Model):
         return self.rows * self.seats_in_row
 
     def __str__(self):
-        return f"{self.name} ({self.rows}x{self.seats_in_row})"
+        return f'{self.name} ({self.rows}x{self.seats_in_row})'
 
 
 def movie_image_file_path(instance, filename):
-    ext = filename.split(".")[-1]
-    filename = f"{slugify(instance.title)}-{uuid.uuid4()}.{ext}"
-    return os.path.join("uploads/movies/", filename)
+    ext = filename.split('.')[-1]
+    filename = f'{slugify(instance.title)}-{uuid.uuid4()}.{ext}'
+    return os.path.join('uploads/movies/', filename)
 
 
 class Movie(models.Model):
@@ -60,12 +60,12 @@ class MovieSession(models.Model):
     cinema_hall = models.ForeignKey(CinemaHall, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.movie.title} {str(self.show_time)}"
+        return f'{self.movie.title} {str(self.show_time)}'
 
 
 class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey("user.User", on_delete=models.CASCADE)
+    user = models.ForeignKey('user.User', on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.created_at)
@@ -78,7 +78,7 @@ class Ticket(models.Model):
     seat = models.IntegerField()
 
     class Meta:
-        unique_together = ("movie_session", "row", "seat")
+        unique_together = ('movie_session', 'row', 'seat')
 
     def __str__(self):
-        return f"{self.movie_session} (row: {self.row}, seat: {self.seat})"
+        return f'{self.movie_session} (row: {self.row}, seat: {self.seat})'
